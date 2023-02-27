@@ -6,6 +6,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:machsite/add_exec_row.dart';
 import 'package:machsite/app_bar.dart';
 import 'package:machsite/common.dart';
+import 'package:machsite/run_bar.dart';
 import 'package:machsite/state/generic_state_notifier.dart';
 import 'package:machsite/drawer.dart';
 import 'package:http/http.dart' as http;
@@ -33,6 +34,7 @@ class DashboardPage extends ConsumerWidget {
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+                  Flexible(child: RunBar()),
                   Flexible(child: ExecRows()),
                   Flexible(child: AddExecRow()),
                 ],
