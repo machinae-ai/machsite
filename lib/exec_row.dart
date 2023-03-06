@@ -3,11 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:machsite/providers/firestore.dart';
 
+import 'add_cell_dialog.dart';
 import 'exec_cell.dart';
 
-class ExecRow extends ConsumerWidget {
+class ExecCells extends ConsumerWidget {
   final DocumentReference execRow;
-  ExecRow(this.execRow, {Key? key}) : super(key: key);
+  ExecCells(this.execRow, {Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -18,7 +19,7 @@ class ExecRow extends ConsumerWidget {
             padding: EdgeInsets.all(10),
             child: Expanded(
                 child: Row(children: [
-              Text(data.data()!['name']),
+              //Text(data.data()!['name']),
               Expanded(
                   child: Row(
                       children: ref
@@ -31,9 +32,13 @@ class ExecRow extends ConsumerWidget {
                                   .toList()))),
               IconButton(
                   icon: Icon(Icons.add),
-                  onPressed: () => {
-                        execRow.collection('cell').add({'name': 'New Cell'})
-                      })
+                  onPressed: () =>
+                      showAddCellDialog(context, execRow.collection('cell'))),
+              // IconButton(
+              //     onPressed: () {
+              //       execRow.delete();
+              //     },
+              //     icon: Icon(Icons.delete))
             ]))));
   }
 }

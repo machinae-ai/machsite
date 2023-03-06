@@ -10,6 +10,7 @@ import 'package:machsite/run_bar.dart';
 import 'package:machsite/state/generic_state_notifier.dart';
 import 'package:machsite/drawer.dart';
 import 'package:http/http.dart' as http;
+import 'exec_row.dart';
 import 'exec_rows.dart';
 
 final activeApplication =
@@ -35,8 +36,8 @@ class DashboardPage extends ConsumerWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Flexible(child: RunBar()),
-                  Flexible(child: ExecRows()),
-                  Flexible(child: AddExecRow()),
+                  Flexible(child: ExecCells(kDB.doc('project/1'))),
+                  // Flexible(child: AddExecRow()),
                 ],
               )),
         ));

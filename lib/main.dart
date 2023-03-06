@@ -2,17 +2,19 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:machsite/cell_editor.dart';
 import 'package:machsite/choose_userview.dart';
 import 'package:machsite/login_page.dart';
-import 'package:machsite/sandbox/sandbox.dart';
-import 'package:machsite/sandbox/sandbox_launcher.dart';
 import 'package:machsite/state/generic_state_notifier.dart';
 import 'package:machsite/state/theme_state_notifier.dart';
 import 'package:machsite/theme.dart';
+import 'package:sandbox/sandbox_launcher.dart';
+import 'common.dart';
 import 'firebase_options.dart';
 import 'package:clipboard/clipboard.dart';
 
-void main() async {
+void main(List<String> args) async {
+  print('args: $args');
   WidgetsFlutterBinding.ensureInitialized();
 
   // FlutterClipboard.paste().then((value) {
@@ -35,12 +37,24 @@ class MainApp extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     bool isDarkTheme = ref.watch(themeStateNotifierProvider);
     return MaterialApp(
-        title: 'AI MACHINAE',
-        themeMode: isDarkTheme ? ThemeMode.dark : ThemeMode.light,
-        theme: lightTheme,
-        darkTheme: darkTheme,
-        home: //TheApp(),
-            SandboxLauncher(app: TheApp(), sandbox: Sandbox()));
+      title: 'AI MACHINAE',
+      themeMode: isDarkTheme ? ThemeMode.dark : ThemeMode.light,
+      theme: lightTheme,
+      darkTheme: darkTheme,
+      home: SandboxLauncher(
+        app: TheApp(),
+        sandbox: Scaffold(
+            body: CellEditor(DB.doc(
+                '/execRow/8iklcwPZXjRy4EFblLPW/cell/f95PfS75PCfBBN9EWfaO'))),
+        getInitialState: () => kDB
+            .doc('sandbox/serge')
+            .get()
+            .then((doc) => doc.data()!['sandbox']),
+        saveState: (state) => {
+          kDB.doc('sandbox/serge').set({'sandbox': state})
+        },
+      ),
+    );
   }
 }
 

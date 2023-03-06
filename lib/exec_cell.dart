@@ -16,58 +16,59 @@ class ExecCell extends ConsumerWidget {
     return ref.watch(docSP(execCell.path)).when(
         loading: () => Container(),
         error: (e, s) => ErrorWidget(e),
-        data: (data) => Container(
-            padding: EdgeInsets.all(10),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Flexible(child: Text(data.data()!['name'] ?? '')),
-                Flexible(child: Text(data.data()!['prompt'] ?? '')),
-                Flexible(child: Text(data.data()!['code'] ?? '')),
-                IconButton(
-                    onPressed: () {
-                      showDialog(
-                          context: context,
-                          builder: (BuildContext context) {
-                            return AlertDialog(
-                              title: Text("Edit Prompt"),
-                              content: CellEditor(data.reference),
-                              actions: [
-                                ElevatedButton(
-                                  child: Text("Close"),
-                                  onPressed: () {
-                                    Navigator.of(context).pop();
-                                  },
-                                )
-                              ],
-                            );
-                          });
-                    },
-                    icon: Icon(Icons.edit))
+        data: (data) => Card(
+            child: Container(
+                padding: EdgeInsets.all(10),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Flexible(child: Text(data.data()!['name'] ?? '')),
+                    Flexible(child: Text(data.data()!['prompt'] ?? '')),
+                    Flexible(child: Text(data.data()!['code'] ?? '')),
+                    IconButton(
+                        onPressed: () {
+                          showDialog(
+                              context: context,
+                              builder: (BuildContext context) {
+                                return AlertDialog(
+                                  title: Text("Edit Prompt"),
+                                  content: CellEditor(data.reference),
+                                  actions: [
+                                    ElevatedButton(
+                                      child: Text("Close"),
+                                      onPressed: () {
+                                        Navigator.of(context).pop();
+                                      },
+                                    )
+                                  ],
+                                );
+                              });
+                        },
+                        icon: Icon(Icons.edit))
 
-                // SizedBox(
-                //     width: 200,
-                //     height: 100,
-                //     child: Row(
-                //         mainAxisSize: MainAxisSize.max,
-                //         mainAxisAlignment: MainAxisAlignment.start,
-                //         children: [
-                //           Expanded(
-                //               child: TextField(
-                //                   maxLines: null,
-                //                   decoration: InputDecoration(
-                //                     border: OutlineInputBorder(),
-                //                     labelText: 'Prompt',
-                //                   ),
-                //                   onSubmitted: (v) {
-                //                     print(v);
-                //                     data.reference.set(
-                //                         {'prompt': v}, SetOptions(merge: true));
-                //                   }))
-                //         ]))
-              ],
-            )));
+                    // SizedBox(
+                    //     width: 200,
+                    //     height: 100,
+                    //     child: Row(
+                    //         mainAxisSize: MainAxisSize.max,
+                    //         mainAxisAlignment: MainAxisAlignment.start,
+                    //         children: [
+                    //           Expanded(
+                    //               child: TextField(
+                    //                   maxLines: null,
+                    //                   decoration: InputDecoration(
+                    //                     border: OutlineInputBorder(),
+                    //                     labelText: 'Prompt',
+                    //                   ),
+                    //                   onSubmitted: (v) {
+                    //                     print(v);
+                    //                     data.reference.set(
+                    //                         {'prompt': v}, SetOptions(merge: true));
+                    //                   }))
+                    //         ]))
+                  ],
+                ))));
   }
 }

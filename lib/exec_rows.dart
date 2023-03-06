@@ -30,7 +30,7 @@ class ExecRows extends ConsumerWidget {
                     // a
                     //         .data()['timeCreated']
                     //         .compareTo(b.data()['timeCreated'])
-                    .map((e) => ExecRow(e.reference))
+                    .map((e) => ExecCells(e.reference))
                     .toList()));
   }
 }

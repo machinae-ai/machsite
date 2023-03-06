@@ -76,3 +76,10 @@ final cellBorder = BoxDecoration(
   top: BorderSide(color: CELL_BORDER_COLOR, width: 0.3),
   bottom: BorderSide(color: CELL_BORDER_COLOR, width: 0.3),
 ));
+
+typedef DS = DocumentSnapshot<Map<String, dynamic>>;
+typedef DR = DocumentReference<Map<String, dynamic>>;
+typedef CR = CollectionReference<Map<String, dynamic>>;
+
+final kDB = FirebaseFirestore.instance;
+final kUSR = FirebaseAuth.instance.currentUser;

@@ -48,8 +48,15 @@ dependencies:
   flutter_firebase_auth:
     git: https://github.com/amlcloud/flutter-firebase-auth.git
   chat_gpt_sdk: ^2.0.0
+  sandbox:
+    git: 
+      url: https://github.com/kovarny/sandbox.git
+  openai: ^1.0.0
+  
 
 dependency_overrides:
+  sandbox:
+    path: ../sandbox/
   flutter_firebase_auth:
     path: ../flutter-firebase-auth
 
