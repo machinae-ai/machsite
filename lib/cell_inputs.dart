@@ -27,6 +27,9 @@ class CellInputs extends ConsumerWidget {
                                   'name': e.data()['name'],
                                   'cell': e.reference
                                 }),
+                                cellDocRef.update({
+                                  'input': FieldValue.arrayUnion([e.reference])
+                                }),
                                 print('added input')
                               },
                           child: Chip(label: Text(e.data()['name']))))

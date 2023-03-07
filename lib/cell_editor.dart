@@ -54,7 +54,7 @@ class CellEditor extends ConsumerWidget {
                         //'model': 'text-davinci-003',
                         'model': 'code-davinci-002',
                         'prompt': doc.data()?['prompt'],
-                        'max_tokens': 500,
+                        'max_tokens': 50,
                         'temperature': 0,
                         'top_p': 1,
                         'frequency_penalty': 0,

@@ -35,7 +35,7 @@ class DashboardPage extends ConsumerWidget {
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Flexible(child: RunBar()),
+                  Flexible(child: RunBar(kDB.doc('project/1'))),
                   Flexible(child: ExecCells(kDB.doc('project/1'))),
                   // Flexible(child: AddExecRow()),
                 ],
