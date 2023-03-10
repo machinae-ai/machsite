@@ -15,6 +15,38 @@ import 'package:machsite/run_log_widget.dart';
 import 'cell_output.dart';
 import 'common.dart';
 
+enum CellType { python, eval, gptText, gptCode, getPage }
+
+class _CellTypeInfo {
+  final String name;
+
+  const _CellTypeInfo({required this.name});
+}
+
+extension CellTypeExt on CellType {
+  _CellTypeInfo get info {
+    switch (this) {
+      case CellType.python:
+        return const _CellTypeInfo(name: 'Python');
+      case CellType.eval:
+        return const _CellTypeInfo(name: 'Eval');
+      case CellType.gptText:
+        return const _CellTypeInfo(name: 'GPT Text');
+      case CellType.gptCode:
+        return const _CellTypeInfo(name: 'GPT Code');
+      case CellType.getPage:
+        return const _CellTypeInfo(name: 'Get Page');
+      default:
+        throw ArgumentError('Unknown fruit: $this');
+    }
+  }
+}
+
+getCellTypeByString(String cellTypeString) {
+  return CellType.values
+      .firstWhere((e) => e.toString().split('.').last == cellTypeString);
+}
+
 class CellEditor extends ConsumerWidget {
   final DocumentReference<Map<String, dynamic>> docRef;
 
@@ -24,8 +56,9 @@ class CellEditor extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return Column(children: [
       ref.watch(docFP(docRef.path)).when(
-          data: (data) =>
-              Text('id: ${docRef.id}, type: ${data.data()!['type']}'),
+          data: (data) => Text(
+              """id: ${docRef.id}, type: ${getCellTypeByString(data.data()!['type'])}, type_name: 
+              ${CellTypeExt(getCellTypeByString(data.data()!['type'])).info.name}"""),
           loading: () => Text('loading'),
           error: (e, s) => Text('error $e')),
 
@@ -53,7 +86,8 @@ class CellEditor extends ConsumerWidget {
                       body: jsonEncode({
                         //'model': 'text-davinci-003',
                         'model': 'code-davinci-002',
-                        'prompt': doc.data()?['prompt'],
+                        'prompt': '${doc.data()?['prompt']}',
+                        //'"""\n${doc.data()?['prompt']}\n"""',
                         'max_tokens': 50,
                         'temperature': 0,
                         'top_p': 1,
