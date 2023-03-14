@@ -7,15 +7,16 @@ import 'package:machsite/add_exec_row.dart';
 import 'package:machsite/app_bar.dart';
 import 'package:machsite/common.dart';
 import 'package:machsite/run_bar.dart';
+import 'package:machsite/run_log.dart';
 import 'package:machsite/state/generic_state_notifier.dart';
 import 'package:machsite/drawer.dart';
 import 'package:http/http.dart' as http;
 import 'exec_row.dart';
 import 'exec_rows.dart';
+import 'inputs.dart';
 
-final activeApplication =
-    StateNotifierProvider<GenericStateNotifier<String?>, String?>(
-        (ref) => GenericStateNotifier<String?>(null));
+final activeRun = StateNotifierProvider<GenericStateNotifier<String?>, String?>(
+    (ref) => GenericStateNotifier<String?>(null));
 
 class DashboardPage extends ConsumerWidget {
   String uid = FirebaseAuth.instance.currentUser!.uid;
@@ -36,6 +37,8 @@ class DashboardPage extends ConsumerWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Flexible(child: RunBar(kDB.doc('project/1'))),
+                  Flexible(child: RunLog(kDB.doc('project/1'))),
+                  Flexible(child: Inputs(kDB.doc('project/1'))),
                   Flexible(child: ExecCells(kDB.doc('project/1'))),
                   // Flexible(child: AddExecRow()),
                 ],

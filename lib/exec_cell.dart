@@ -1,11 +1,14 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:machsite/common.dart';
 import 'package:machsite/controls/doc_field_text_edit.dart';
 import 'package:machsite/controls/doc_multiline_text_field.dart';
 import 'package:machsite/providers/firestore.dart';
 
 import 'cell_editor.dart';
+import 'cell_inputs.dart';
+import 'exec_type.dart';
 
 class ExecCell extends ConsumerWidget {
   final DocumentReference execCell;
@@ -24,16 +27,27 @@ class ExecCell extends ConsumerWidget {
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
+                    _buildInputs(context, ref, data),
+                    if (data.data()!['type'] == CellType.eval)
+                      _buildEvalContent(context, ref, data),
+                    if (data.data()!['type'] == CellType.gpt_code)
+                      _buildGPTCodeContent(context, ref, data),
+
                     Flexible(child: Text(data.data()!['name'] ?? '')),
                     Flexible(child: Text(data.data()!['prompt'] ?? '')),
                     Flexible(child: Text(data.data()!['code'] ?? '')),
+                    Flexible(
+                        child: Row(children: [
+                      Text('=>'),
+                      Card(child: Text('${data.data()!['output'] ?? ''}'))
+                    ])),
                     IconButton(
                         onPressed: () {
                           showDialog(
                               context: context,
                               builder: (BuildContext context) {
                                 return AlertDialog(
-                                  title: Text("Edit Prompt"),
+                                  title: Text("Edit"),
                                   content: CellEditor(data.reference),
                                   actions: [
                                     ElevatedButton(
@@ -70,5 +84,23 @@ class ExecCell extends ConsumerWidget {
                     //         ]))
                   ],
                 ))));
+  }
+
+  _buildEvalContent(BuildContext context, WidgetRef ref, DS data) {
+    return Column(
+      children: [Text(data['code'])],
+    );
+  }
+
+  _buildGPTCodeContent(BuildContext context, WidgetRef ref,
+      DocumentSnapshot<Map<String, dynamic>> data) {
+    return Column(
+      children: [Text(data['code'])],
+    );
+  }
+
+  _buildInputs(BuildContext context, WidgetRef ref,
+      DocumentSnapshot<Map<String, dynamic>> data) {
+    return CellInputs(data);
   }
 }

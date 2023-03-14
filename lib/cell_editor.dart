@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:http/http.dart';
 import 'package:jiffy/jiffy.dart';
-import 'package:machsite/cell_inputs.dart';
+import 'package:machsite/inputs_editor.dart';
 import 'package:machsite/controls/doc_field_text_edit.dart';
 import 'package:machsite/controls/doc_multiline_text_field.dart';
 import 'package:machsite/providers/firestore.dart';
@@ -14,38 +14,7 @@ import 'package:machsite/run_log_widget.dart';
 
 import 'cell_output.dart';
 import 'common.dart';
-
-enum CellType { python, eval, gptText, gptCode, getPage }
-
-class _CellTypeInfo {
-  final String name;
-
-  const _CellTypeInfo({required this.name});
-}
-
-extension CellTypeExt on CellType {
-  _CellTypeInfo get info {
-    switch (this) {
-      case CellType.python:
-        return const _CellTypeInfo(name: 'Python');
-      case CellType.eval:
-        return const _CellTypeInfo(name: 'Eval');
-      case CellType.gptText:
-        return const _CellTypeInfo(name: 'GPT Text');
-      case CellType.gptCode:
-        return const _CellTypeInfo(name: 'GPT Code');
-      case CellType.getPage:
-        return const _CellTypeInfo(name: 'Get Page');
-      default:
-        throw ArgumentError('Unknown fruit: $this');
-    }
-  }
-}
-
-getCellTypeByString(String cellTypeString) {
-  return CellType.values
-      .firstWhere((e) => e.toString().split('.').last == cellTypeString);
-}
+import 'exec_type.dart';
 
 class CellEditor extends ConsumerWidget {
   final DocumentReference<Map<String, dynamic>> docRef;
@@ -55,16 +24,16 @@ class CellEditor extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Column(children: [
-      ref.watch(docFP(docRef.path)).when(
-          data: (data) => Text(
-              """id: ${docRef.id}, type: ${getCellTypeByString(data.data()!['type'])}, type_name: 
-              ${CellTypeExt(getCellTypeByString(data.data()!['type'])).info.name}"""),
-          loading: () => Text('loading'),
-          error: (e, s) => Text('error $e')),
+      // ref.watch(docFP(docRef.path)).when(
+      //     data: (data) => Text(
+      //         """id: ${docRef.id}, type: ${getCellTypeByString(data.data()!['type'])}, type_name:
+      //         ${CellTypeExt(getCellTypeByString(data.data()!['type'])).info.name}"""),
+      //     loading: () => Text('loading'),
+      //     error: (e, s) => Text('error $e')),
 
       DocFieldTextEdit2(docRef, 'name',
           decoration: InputDecoration(label: Text('Cell Name'))),
-      CellInputs(docRef),
+      InputsEditor(docRef),
       DocMultilineTextField(docRef, 'prompt', 5),
       ElevatedButton(
           onPressed: () async {

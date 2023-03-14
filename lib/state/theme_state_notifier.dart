@@ -19,6 +19,8 @@ class ThemeStateNotifier extends StateNotifier<bool> {
         bool isDark = theme == 'light' ? false : true;
         state = isDark;
       });
+    } else {
+      state = true;
     }
   }
   void changeTheme() {

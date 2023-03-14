@@ -45,12 +45,22 @@ dependencies:
   jiffy: ^5.0.0
   rxdart: ^0.27.4
   http: ^0.13.5
-  flutter_firebase_auth:
-    git: https://github.com/amlcloud/flutter-firebase-auth.git
-  chat_gpt_sdk: ^2.0.0
+  common:
+    git: 
+      url: https://github.com/kovarny/flutter_firebase_framework.git
+      path: common
   sandbox:
     git: 
-      url: https://github.com/kovarny/sandbox.git
+      url: https://github.com/kovarny/flutter_firebase_framework.git
+      path: sandbox
+  providers:
+    git: 
+      url: https://github.com/kovarny/flutter_firebase_framework.git
+      path: providers
+  auth:
+    git: 
+      url: https://github.com/kovarny/flutter_firebase_framework.git
+      path: auth
   openai: ^1.0.0
   
 
