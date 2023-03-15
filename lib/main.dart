@@ -1,3 +1,4 @@
+import 'package:common/common.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -43,9 +44,10 @@ class MainApp extends ConsumerWidget {
       darkTheme: darkTheme,
       home: SandboxLauncher(
         app: TheApp(),
-        sandbox: Scaffold(
-            body: CellEditor(DB.doc(
-                '/execRow/8iklcwPZXjRy4EFblLPW/cell/f95PfS75PCfBBN9EWfaO'))),
+        sandbox: Scaffold(body: Container()
+            // CellEditor(kDB.doc(
+            //     '/execRow/8iklcwPZXjRy4EFblLPW/cell/f95PfS75PCfBBN9EWfaO'))
+            ),
         getInitialState: () => kDB
             .doc('sandbox/serge')
             .get()

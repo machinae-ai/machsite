@@ -1,5 +1,7 @@
 import 'dart:js';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:common/common.dart';
 import 'package:flutter/material.dart';
 
 import 'common.dart';
@@ -25,7 +27,10 @@ showAddCellDialog(BuildContext context, CR colRef) {
                           child: Text('Python Exec'), value: 'python'),
                       DropdownMenuItem(
                           child: Text('Python Eval'), value: 'eval'),
-                      DropdownMenuItem(child: Text('GPT'), value: 'gpt'),
+                      DropdownMenuItem(
+                          child: Text('GPT Code'), value: 'gpt_code'),
+                      DropdownMenuItem(
+                          child: Text('GPT Text'), value: 'gpt_text'),
                       DropdownMenuItem(
                           child: Text('Get Page'), value: 'get_page')
                     ],
@@ -42,7 +47,13 @@ showAddCellDialog(BuildContext context, CR colRef) {
                   child: Text('Cancel')),
               TextButton(
                   onPressed: () {
-                    colRef.add({'name': _addCellController.text, 'type': type});
+                    colRef.add({
+                      'name': _addCellController.text,
+                      'type': type,
+                      'timeCreated': FieldValue.serverTimestamp(),
+                      'inputs': ['init'],
+                      
+                    });
                     Navigator.of(context).pop();
                   },
                   child: Text('Add'))

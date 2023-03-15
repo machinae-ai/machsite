@@ -1,8 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:machsite/providers/firestore.dart';
 import 'package:machsite/state/generic_state_notifier.dart';
+import 'package:providers/firestore.dart';
 
 class DocFieldDropDown extends ConsumerWidget {
   final DocumentReference docRef;

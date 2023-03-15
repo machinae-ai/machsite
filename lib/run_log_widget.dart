@@ -2,7 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:jiffy/jiffy.dart';
-import 'package:machsite/providers/firestore.dart';
+import 'package:providers/firestore.dart';
 
 import 'common.dart';
 

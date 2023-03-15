@@ -1,15 +1,16 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:common/common.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:jiffy/jiffy.dart';
 import 'package:machsite/exec_cell.dart';
-import 'package:machsite/providers/firestore.dart';
+import 'package:providers/firestore.dart';
 
 import 'common.dart';
-import 'exec_row.dart';
+import 'exec_cells.dart';
 
 class ExecRows extends ConsumerWidget {
-  final CollectionReference execRows = DB.collection("execRow");
+  final CollectionReference execRows = kDB.collection("execRow");
   ExecRows({Key? key}) : super(key: key);
 
   @override

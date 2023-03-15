@@ -1,10 +1,11 @@
 import 'dart:html';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:common/common.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:machsite/common.dart';
-import 'package:machsite/providers/firestore.dart';
+import 'package:providers/firestore.dart';
 
 class UserProfileDetails extends ConsumerWidget {
   const UserProfileDetails({
@@ -27,7 +28,7 @@ class UserProfileDetails extends ConsumerWidget {
                   hintText: 'Enter API Key',
                 ),
                 onSubmitted: (v) {
-                  DB
+                  kDB
                       .doc('user/${AUTH.currentUser!.uid}')
                       .set({'apiKey': v}, SetOptions(merge: true));
                 },

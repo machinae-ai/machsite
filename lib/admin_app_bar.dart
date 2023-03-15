@@ -1,6 +1,6 @@
+import 'package:auth/current_user_avatar.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_firebase_auth/current_user_avatar.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:machsite/main.dart';
 import 'package:machsite/state/theme_state_notifier.dart';

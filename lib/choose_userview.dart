@@ -3,8 +3,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:machsite/admin_viewpage.dart';
-import 'package:machsite/providers/firestore.dart';
 import 'package:machsite/user_viewpage.dart';
+import 'package:providers/firestore.dart';
 
 class ChooseUserViewWidget extends ConsumerWidget {
   const ChooseUserViewWidget({super.key});

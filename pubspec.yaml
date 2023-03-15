@@ -64,13 +64,6 @@ dependencies:
   openai: ^1.0.0
   
 
-dependency_overrides:
-  sandbox:
-    path: ../sandbox/
-  flutter_firebase_auth:
-    path: ../flutter-firebase-auth
-
-
 dev_dependencies:
   flutter_test:
     sdk: flutter

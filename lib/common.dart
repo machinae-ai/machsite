@@ -3,7 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:jiffy/jiffy.dart';
 
-final DB = FirebaseFirestore.instance;
+// final DB = FirebaseFirestore.instance;
 final AUTH = FirebaseAuth.instance;
 const DATE_FORMAT = 'yyyy-MM-dd';
 
@@ -77,9 +77,9 @@ final cellBorder = BoxDecoration(
   bottom: BorderSide(color: CELL_BORDER_COLOR, width: 0.3),
 ));
 
-typedef DS = DocumentSnapshot<Map<String, dynamic>>;
-typedef DR = DocumentReference<Map<String, dynamic>>;
-typedef CR = CollectionReference<Map<String, dynamic>>;
+// typedef DS = DocumentSnapshot<Map<String, dynamic>>;
+// typedef DR = DocumentReference<Map<String, dynamic>>;
+// typedef CR = CollectionReference<Map<String, dynamic>>;
 
-final kDB = FirebaseFirestore.instance;
-final kUSR = FirebaseAuth.instance.currentUser;
+// final kDB = FirebaseFirestore.instance;
+// final kUSR = FirebaseAuth.instance.currentUser;

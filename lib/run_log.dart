@@ -1,8 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:common/common.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:jiffy/jiffy.dart';
-import 'package:machsite/providers/firestore.dart';
 import 'package:providers/firestore.dart';
 
 import 'common.dart';
@@ -24,7 +24,10 @@ class RunLog extends ConsumerWidget {
             children: runDoc.docs
                 .map((doc) => Row(
                       children: [
-                        Text(Jiffy(doc.data()['timestamp'].toDate()).format()),
+                        doc.data()['timestamp'] == null
+                            ? Container()
+                            : Text(Jiffy(doc.data()['timestamp'].toDate())
+                                .format()),
                         ElevatedButton(
                             onPressed: () =>
                                 ref.read(activeRun.notifier).value = doc.id,

@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:machsite/admin/user_details.dart';
 import 'package:machsite/admin/user_details_page.dart';
-import 'package:machsite/providers/firestore.dart';
 import 'package:machsite/dashboard_page.dart';
+import 'package:providers/firestore.dart';
 
 import '../admin_viewpage.dart';
 import '../controls/doc_field_text_edit.dart';

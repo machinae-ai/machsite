@@ -1,10 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:common/common.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:machsite/common.dart';
 import 'package:machsite/controls/doc_field_text_edit.dart';
 import 'package:machsite/controls/doc_multiline_text_field.dart';
-import 'package:machsite/providers/firestore.dart';
 
 import 'cell_editor.dart';
 import 'cell_input.dart';
@@ -22,7 +22,7 @@ class CellInputs extends ConsumerWidget {
             .data()!['inputs']
             .map<Widget>((e) => e == 'init'
                 ? Container()
-                : CellInput(DB.doc(execCell.reference.parent.parent!
+                : CellInput(kDB.doc(execCell.reference.parent.parent!
                     .collection('input')
                     .doc(e)
                     .path)))
